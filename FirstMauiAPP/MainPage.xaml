@@ -1,24 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Phoneword.MainPage">
-    <Grid BackgroundColor="LightBlue" Padding="20">
-        <Label FontAttributes="Bold" Text="Enter a PhoneWord" FontSize="20" 
-               HorizontalOptions="Center" VerticalOptions="Start"/>
-
-        <FlexLayout Direction="Column"
-                    JustifyContent="Center" 
-                    VerticalOptions="CenterAndExpand">
-            <Entry x:Name="PhoneNumberText" Text="1-555-MYCUMULUS"/>
-            <Button x:Name="TranslateButton"
-                    Text="Translate"
-                    Clicked="OnTranslate"
-                    Margin="0,8,0,8"/>
-            <Button x:Name="CallButton"
-                    Text="Call"
-                    IsEnabled="False"
-                    Clicked="OnCall"/>
-        </FlexLayout>
-    </Grid>
-
+             x:Class="NoteKeeper.MainPage">
+    <VerticalStackLayout Padding="10">
+        <Label Text="Notes" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+        <Editor HeightRequest="100" Placeholder="Enter your note" x:Name="NoteEditor"/>
+        <Grid HorizontalOptions="Center" ColumnDefinitions="Auto, 30, Auto">
+            <Button Grid.Column="0"
+                    Text="Save" 
+                    WidthRequest="100"
+                    Clicked="OnSaveNote"/>            
+            <Button Grid.Column="2"
+                    Text="Delete" 
+                    WidthRequest="100"
+                    Clicked="OnDeleteNotes"/>
+        </Grid>
+        
+        <CollectionView ItemsSource="{Binding Notes}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Padding="10" Margin="5" Stroke="Gray">
+                        <Label Text="{Binding}" />
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        
+    </VerticalStackLayout>
 </ContentPage>
